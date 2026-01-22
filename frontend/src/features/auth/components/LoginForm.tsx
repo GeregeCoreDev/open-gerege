@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import { authApi } from "../api";
 import { loginSchema, type LoginFormData } from "../schemas";
 import type { LoginResponse } from "../types";
@@ -89,16 +88,16 @@ export const LoginForm = () => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4 w-full max-w-sm"
+            className="space-y-5"
             noValidate
         >
             {/* Email */}
             <div className="space-y-2">
                 <label
                     htmlFor="email"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="block text-sm font-medium text-slate-300"
                 >
-                    Email
+                    Email хаяг
                 </label>
                 <input
                     id="email"
@@ -107,11 +106,11 @@ export const LoginForm = () => {
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? "email-error" : undefined}
                     {...register("email")}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full h-11 px-4 rounded-xl bg-slate-700/50 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="name@example.com"
                 />
                 {errors.email && (
-                    <p id="email-error" className="text-sm text-red-500" role="alert">
+                    <p id="email-error" className="text-sm text-red-400" role="alert">
                         {errors.email.message}
                     </p>
                 )}
@@ -122,13 +121,13 @@ export const LoginForm = () => {
                 <div className="flex items-center justify-between">
                     <label
                         htmlFor="password"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        className="block text-sm font-medium text-slate-300"
                     >
                         Нууц үг
                     </label>
                     <Link
                         href="/forgot-password"
-                        className="text-sm text-primary hover:underline"
+                        className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
                     >
                         Нууц үг мартсан?
                     </Link>
@@ -140,26 +139,27 @@ export const LoginForm = () => {
                     aria-invalid={!!errors.password}
                     aria-describedby={errors.password ? "password-error" : undefined}
                     {...register("password")}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="w-full h-11 px-4 rounded-xl bg-slate-700/50 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="••••••••"
                 />
                 {errors.password && (
-                    <p id="password-error" className="text-sm text-red-500" role="alert">
+                    <p id="password-error" className="text-sm text-red-400" role="alert">
                         {errors.password.message}
                     </p>
                 )}
             </div>
 
             {/* Remember Me */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
                 <input
                     id="rememberMe"
                     type="checkbox"
                     {...register("rememberMe")}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    className="h-4 w-4 rounded border-slate-600 bg-slate-700 text-blue-500 focus:ring-blue-500 focus:ring-offset-0"
                 />
                 <label
                     htmlFor="rememberMe"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="ml-2 text-sm text-slate-400"
                 >
                     Намайг сана
                 </label>
@@ -168,25 +168,36 @@ export const LoginForm = () => {
             {/* Error message */}
             {error && (
                 <div
-                    className="p-3 rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+                    className="p-4 rounded-xl bg-red-500/10 border border-red-500/30"
                     role="alert"
                 >
-                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                    <p className="text-sm text-red-400 flex items-center gap-2">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {error}
+                    </p>
                 </div>
             )}
 
             {/* Submit button */}
-            <Button type="submit" disabled={loading} className="w-full">
-                {loading ? "Нэвтэрч байна..." : "Нэвтрэх"}
-            </Button>
-
-            {/* Register link */}
-            <p className="text-center text-sm text-muted-foreground">
-                Бүртгэлгүй юу?{" "}
-                <Link href="/register" className="underline hover:text-primary">
-                    Бүртгүүлэх
-                </Link>
-            </p>
+            <button
+                type="submit"
+                disabled={loading}
+                className="w-full h-11 px-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-blue-600/50 disabled:to-cyan-600/50 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 disabled:shadow-none flex items-center justify-center gap-2"
+            >
+                {loading ? (
+                    <>
+                        <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Нэвтэрч байна...
+                    </>
+                ) : (
+                    "Нэвтрэх"
+                )}
+            </button>
         </form>
     );
 };
