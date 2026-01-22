@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import { loginSchema, type LoginFormData } from "../schemas";
 import type { LoginResponse } from "../types";
 import Cookies from "js-cookie";
 
-export const LoginForm = () => {
+const LoginFormInner = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
@@ -199,5 +199,26 @@ export const LoginForm = () => {
                 )}
             </button>
         </form>
+    );
+};
+
+// Wrapper component with Suspense for useSearchParams
+export const LoginForm = () => {
+    return (
+        <Suspense fallback={
+            <div className="space-y-5 animate-pulse">
+                <div className="space-y-2">
+                    <div className="h-4 w-20 bg-slate-700 rounded"></div>
+                    <div className="h-11 bg-slate-700 rounded-xl"></div>
+                </div>
+                <div className="space-y-2">
+                    <div className="h-4 w-16 bg-slate-700 rounded"></div>
+                    <div className="h-11 bg-slate-700 rounded-xl"></div>
+                </div>
+                <div className="h-11 bg-slate-700 rounded-xl"></div>
+            </div>
+        }>
+            <LoginFormInner />
+        </Suspense>
     );
 };

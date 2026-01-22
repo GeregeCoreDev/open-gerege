@@ -43,7 +43,7 @@ export const RegisterForm = () => {
                 confirmPassword: data.confirmPassword,
                 firstName: data.firstName,
                 lastName: data.lastName,
-                acceptTerms: data.acceptTerms,
+                acceptTerms: true, // Schema validates this is always true
             });
 
             setSuccess(true);

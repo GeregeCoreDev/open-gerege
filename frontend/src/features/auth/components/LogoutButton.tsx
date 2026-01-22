@@ -7,15 +7,15 @@ import { authApi } from "../api";
 import Cookies from "js-cookie";
 
 interface LogoutButtonProps {
-    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-    size?: "default" | "sm" | "lg" | "icon";
+    variant?: "primary" | "secondary" | "outline" | "ghost";
+    size?: "sm" | "md" | "lg";
     className?: string;
     onLogoutSuccess?: () => void;
 }
 
 export const LogoutButton = ({
     variant = "outline",
-    size = "default",
+    size = "md",
     className,
     onLogoutSuccess,
 }: LogoutButtonProps) => {

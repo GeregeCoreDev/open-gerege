@@ -43,9 +43,7 @@ export const registerSchema = z.object({
         .string()
         .min(1, 'Овог оруулна уу')
         .max(150, 'Овог 150 тэмдэгтээс хэтрэх ёсгүй'),
-    acceptTerms: z.literal(true, {
-        errorMap: () => ({ message: 'Үйлчилгээний нөхцөлийг зөвшөөрнө үү' }),
-    }),
+    acceptTerms: z.literal(true, { message: 'Үйлчилгээний нөхцөлийг зөвшөөрнө үү' }),
 }).refine((data) => data.password === data.confirmPassword, {
     message: 'Нууц үг таарахгүй байна',
     path: ['confirmPassword'],
