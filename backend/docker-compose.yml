@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  # --- Dev: hot-reload (Air) ---
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: app-dev
+    ports:
+      - "8080:8080"         # Танай APP_API_PORT=:8080 байхаар тааруул
+    env_file:
+      - .env.dev            # DB гадаа (10.0.0.*) -аас уншигдана
+    volumes:
+      - .:/app              # bind mount - source-оо live уншина
+      - gocache:/go/pkg/mod
+
+  # --- Prod-like: multi-stage build image ---
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-prod
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env.prod
+    restart: unless-stopped
+
+volumes:
+  gocache: {}

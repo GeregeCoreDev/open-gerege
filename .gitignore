@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+/backend/bin/
+/backend/tmp/
+/frontend/.next/
+/frontend/out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+coverage/
+*.cover
+*.out
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Debug
+debug/
+*.test
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build binaries
+/backend/main
+
+# Misc
+NUL
+*.txt
+!README.txt

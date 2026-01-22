@@ -1,0 +1,17 @@
+/**
+ * 🛡️ Business Role Page (/[locale]/(main)/business/role/page.tsx)
+ * 
+ * Энэ нь Business системийн дүр удирдах хуудас юм.
+ * Зорилго: Business системийн дүрүүдийн удирдлага
+ * 
+ * Implementation: Reusable component (RolesBySystem)
+ * 
+ * @author Sengum Soronzonbold
+ * @company Gerege Core Team
+ */
+
+import RolesBySystem from '@/components/common/subSystemRolePage'
+
+export default async function TPayRolePage() {
+  return <RolesBySystem />
+}

@@ -1,0 +1,14 @@
+FROM golang:1.22-alpine
+WORKDIR /app
+
+RUN apk add --no-cache git ca-certificates build-base \
+ && go install github.com/air-verse/air@latest \
+ && go install github.com/swaggo/swag/cmd/swag@latest \
+ && go install github.com/pressly/goose/v3/cmd/goose@latest
+
+# cache modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+EXPOSE 8080
+ENTRYPOINT ["air", "-c", ".air.toml"]

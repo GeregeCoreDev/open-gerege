@@ -1,0 +1,4115 @@
+basePath: /api/v1
+definitions:
+  common.ID:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  ssoclient.ReqFind:
+    properties:
+      search_text:
+        type: string
+    required:
+    - search_text
+    type: object
+  templatev25_internal_http_dto.AccountQRGenerateRequest:
+    properties:
+      amount:
+        minimum: 0
+        type: number
+    type: object
+  templatev25_internal_http_dto.ActionCreateDto:
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  templatev25_internal_http_dto.ActionUpdateDto:
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      is_active:
+        type: boolean
+      name:
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  templatev25_internal_http_dto.BackupCodesResponse:
+    properties:
+      codes:
+        items:
+          type: string
+        type: array
+    type: object
+  templatev25_internal_http_dto.ChangePasswordRequest:
+    properties:
+      current_password:
+        type: string
+      new_password:
+        minLength: 8
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  templatev25_internal_http_dto.ChatItemCreateDto:
+    properties:
+      answer:
+        type: string
+      key:
+        type: string
+    required:
+    - answer
+    - key
+    type: object
+  templatev25_internal_http_dto.ChatItemKeyDto:
+    properties:
+      key:
+        type: string
+    required:
+    - key
+    type: object
+  templatev25_internal_http_dto.ChatItemUpdateDto:
+    properties:
+      answer:
+        type: string
+      key:
+        type: string
+    required:
+    - answer
+    - key
+    type: object
+  templatev25_internal_http_dto.ConfirmCardReq:
+    properties:
+      cardcvv:
+        type: integer
+      checkid:
+        type: string
+      tranid:
+        type: string
+    required:
+    - cardcvv
+    - checkid
+    - tranid
+    type: object
+  templatev25_internal_http_dto.ConfirmTOTPRequest:
+    properties:
+      code:
+        type: string
+    required:
+    - code
+    type: object
+  templatev25_internal_http_dto.CreateCardDto:
+    properties:
+      card_exp:
+        type: string
+      card_number:
+        type: string
+    required:
+    - card_exp
+    - card_number
+    type: object
+  templatev25_internal_http_dto.DisableTOTPRequest:
+    properties:
+      code:
+        type: string
+    required:
+    - code
+    type: object
+  templatev25_internal_http_dto.ErrorResponse:
+    description: Error response structure
+    properties:
+      code:
+        description: Error code
+        example: BAD_REQUEST
+        type: string
+      details:
+        additionalProperties:
+          type: string
+        description: Detailed error information
+        type: object
+      message:
+        description: Error message
+        example: Invalid request parameters
+        type: string
+      request_id:
+        description: Request ID for debugging
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+    type: object
+  templatev25_internal_http_dto.LoginHistoryEntry:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      failure_reason:
+        type: string
+      id:
+        type: integer
+      ip_address:
+        type: string
+      login_method:
+        type: string
+      mfa_used:
+        type: boolean
+      success:
+        type: boolean
+      user_agent:
+        type: string
+    type: object
+  templatev25_internal_http_dto.LoginHistoryResponse:
+    properties:
+      entries:
+        items:
+          $ref: '#/definitions/templatev25_internal_http_dto.LoginHistoryEntry'
+        type: array
+      total:
+        type: integer
+    type: object
+  templatev25_internal_http_dto.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 8
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  templatev25_internal_http_dto.LoginResponse:
+    properties:
+      access_token:
+        type: string
+      expires_at:
+        type: integer
+      mfa_token:
+        type: string
+      requires_mfa:
+        type: boolean
+      user:
+        $ref: '#/definitions/templatev25_internal_http_dto.UserInfo'
+    type: object
+  templatev25_internal_http_dto.MFAStatusResponse:
+    properties:
+      backup_codes_left:
+        type: integer
+      enabled:
+        type: boolean
+      has_backup_codes:
+        type: boolean
+    type: object
+  templatev25_internal_http_dto.MenuCreateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      icon:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      key:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      parent_id:
+        type: integer
+      path:
+        maxLength: 255
+        type: string
+      permission_id:
+        type: integer
+      sequence:
+        type: integer
+    required:
+    - code
+    - key
+    - name
+    type: object
+  templatev25_internal_http_dto.MenuUpdateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      icon:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      key:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      parent_id:
+        type: integer
+      path:
+        maxLength: 255
+        type: string
+      permission_id:
+        type: integer
+      sequence:
+        type: integer
+    required:
+    - code
+    - key
+    - name
+    type: object
+  templatev25_internal_http_dto.ModuleCreateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      name:
+        maxLength: 255
+        type: string
+      system_id:
+        type: integer
+    required:
+    - code
+    - name
+    - system_id
+    type: object
+  templatev25_internal_http_dto.ModuleUpdateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      name:
+        maxLength: 255
+        type: string
+      system_id:
+        type: integer
+    required:
+    - code
+    - name
+    - system_id
+    type: object
+  templatev25_internal_http_dto.NewsDto:
+    properties:
+      image_url:
+        maxLength: 255
+        minLength: 3
+        type: string
+      text:
+        minLength: 3
+        type: string
+      title:
+        maxLength: 255
+        minLength: 3
+        type: string
+    required:
+    - text
+    - title
+    type: object
+  templatev25_internal_http_dto.NotificationReadDto:
+    properties:
+      group_id:
+        type: integer
+    required:
+    - group_id
+    type: object
+  templatev25_internal_http_dto.NotificationSendDto:
+    properties:
+      content:
+        type: string
+      idempotency_key:
+        type: string
+      tenant:
+        type: string
+      title:
+        type: string
+      user_id:
+        description: 0 бол broadcast_all
+        type: integer
+    required:
+    - tenant
+    type: object
+  templatev25_internal_http_dto.OrgTypeAddSystemsDto:
+    properties:
+      system_ids:
+        items:
+          type: integer
+        minItems: 1
+        type: array
+      type_id:
+        type: integer
+    required:
+    - system_ids
+    - type_id
+    type: object
+  templatev25_internal_http_dto.OrgTypeRolesAddDto:
+    properties:
+      role_ids:
+        items:
+          type: integer
+        type: array
+      type_id:
+        description: org type id
+        type: integer
+    required:
+    - role_ids
+    - type_id
+    type: object
+  templatev25_internal_http_dto.OrgUserCreateDto:
+    properties:
+      org_id:
+        type: integer
+      user_id:
+        type: integer
+    required:
+    - org_id
+    - user_id
+    type: object
+  templatev25_internal_http_dto.OrgUserDeleteDto:
+    properties:
+      org_id:
+        type: integer
+      user_id:
+        type: integer
+    required:
+    - org_id
+    - user_id
+    type: object
+  templatev25_internal_http_dto.OrganizationDto:
+    properties:
+      address_detail:
+        maxLength: 255
+        type: string
+      aimag_id:
+        type: integer
+      aimag_name:
+        maxLength: 255
+        type: string
+      bag_id:
+        type: integer
+      bag_name:
+        maxLength: 255
+        type: string
+      country_code:
+        type: string
+      country_name:
+        type: string
+      country_name_en:
+        type: string
+      email:
+        maxLength: 50
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      latitude:
+        type: number
+      longitude:
+        type: number
+      name:
+        maxLength: 255
+        type: string
+      parent_address_id:
+        type: integer
+      parent_address_name:
+        maxLength: 25
+        type: string
+      parent_id:
+        type: integer
+      phone_no:
+        maxLength: 8
+        type: string
+      reg_no:
+        maxLength: 7
+        type: string
+      sequence:
+        type: integer
+      short_name:
+        maxLength: 255
+        type: string
+      sum_id:
+        type: integer
+      sum_name:
+        maxLength: 255
+        type: string
+      type_id:
+        type: integer
+    required:
+    - name
+    - reg_no
+    - type_id
+    type: object
+  templatev25_internal_http_dto.OrganizationTypeDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+    required:
+    - code
+    - name
+    type: object
+  templatev25_internal_http_dto.OrganizationUpdateDto:
+    properties:
+      address_detail:
+        maxLength: 255
+        type: string
+      aimag_id:
+        type: integer
+      aimag_name:
+        maxLength: 255
+        type: string
+      bag_id:
+        type: integer
+      bag_name:
+        maxLength: 255
+        type: string
+      country_code:
+        type: string
+      country_name:
+        type: string
+      country_name_en:
+        type: string
+      email:
+        maxLength: 50
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      latitude:
+        type: number
+      longitude:
+        type: number
+      name:
+        maxLength: 255
+        type: string
+      parent_address_id:
+        type: integer
+      parent_address_name:
+        maxLength: 25
+        type: string
+      parent_id:
+        type: integer
+      phone_no:
+        maxLength: 8
+        type: string
+      reg_no:
+        maxLength: 7
+        type: string
+      sequence:
+        type: integer
+      short_name:
+        maxLength: 255
+        type: string
+      sum_id:
+        type: integer
+      sum_name:
+        maxLength: 255
+        type: string
+      type_id:
+        type: integer
+    required:
+    - name
+    - reg_no
+    - type_id
+    type: object
+  templatev25_internal_http_dto.P2PTransferRequest:
+    properties:
+      amount:
+        type: number
+      description:
+        maxLength: 500
+        type: string
+      pin:
+        type: string
+      receiver_account_id:
+        type: integer
+      receiver_phone:
+        maxLength: 15
+        minLength: 8
+        type: string
+    required:
+    - amount
+    - pin
+    type: object
+  templatev25_internal_http_dto.PaginatedResponse:
+    description: Paginated response structure
+    properties:
+      code:
+        description: Business logic code
+        example: OK
+        type: string
+      data:
+        description: Response data
+      message:
+        description: Message
+        example: success
+        type: string
+      meta:
+        allOf:
+        - $ref: '#/definitions/templatev25_internal_http_dto.PaginationMeta'
+        description: Pagination metadata
+      request_id:
+        description: Request ID
+        type: string
+    type: object
+  templatev25_internal_http_dto.PaginationMeta:
+    description: Pagination metadata
+    properties:
+      page:
+        description: Current page number
+        example: 1
+        type: integer
+      size:
+        description: Page size
+        example: 20
+        type: integer
+      total:
+        description: Total number of items
+        example: 100
+        type: integer
+      total_pages:
+        description: Total number of pages
+        example: 5
+        type: integer
+    type: object
+  templatev25_internal_http_dto.PermissionCreateDto:
+    properties:
+      action_ids:
+        items:
+          type: integer
+        minItems: 1
+        type: array
+      module_id:
+        type: integer
+      system_id:
+        type: integer
+    required:
+    - action_ids
+    - module_id
+    - system_id
+    type: object
+  templatev25_internal_http_dto.QRPayRequest:
+    properties:
+      card_id:
+        description: Required if payment_method_id is CARD
+        type: integer
+      description:
+        type: string
+      payment_method_id:
+        description: 1=WALLET, 2=CARD, etc.
+        type: integer
+      qr_string:
+        type: string
+    required:
+    - payment_method_id
+    - qr_string
+    type: object
+  templatev25_internal_http_dto.ReqVerifyCard:
+    properties:
+      id:
+        type: integer
+      otp:
+        type: string
+    type: object
+  templatev25_internal_http_dto.Response:
+    description: Standard API response wrapper
+    properties:
+      code:
+        description: Business logic code (OK, BAD_REQUEST, etc.)
+        example: OK
+        type: string
+      data:
+        description: Response data (can be any type)
+      details:
+        description: Error details for validation errors
+      message:
+        description: Human-readable message
+        example: success
+        type: string
+      request_id:
+        description: Unique request identifier
+        example: 550e8400-e29b-41d4-a716-446655440000
+        type: string
+    type: object
+  templatev25_internal_http_dto.RoleCreateDto:
+    properties:
+      code:
+        maxLength: 255
+        minLength: 2
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      system_id:
+        type: integer
+    required:
+    - code
+    - name
+    - system_id
+    type: object
+  templatev25_internal_http_dto.RolePermissionsUpdateDto:
+    properties:
+      permission_ids:
+        items:
+          type: integer
+        minItems: 0
+        type: array
+      role_id:
+        type: integer
+    required:
+    - permission_ids
+    - role_id
+    type: object
+  templatev25_internal_http_dto.RoleUpdateDto:
+    properties:
+      code:
+        maxLength: 255
+        minLength: 2
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      system_id:
+        type: integer
+    required:
+    - code
+    - name
+    - system_id
+    type: object
+  templatev25_internal_http_dto.SecurityAuditEntry:
+    properties:
+      action:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      ip_address:
+        type: string
+      new_value:
+        type: string
+      old_value:
+        type: string
+      target_id:
+        type: string
+      target_type:
+        type: string
+      user_agent:
+        type: string
+    type: object
+  templatev25_internal_http_dto.SecurityAuditResponse:
+    properties:
+      entries:
+        items:
+          $ref: '#/definitions/templatev25_internal_http_dto.SecurityAuditEntry'
+        type: array
+      total:
+        type: integer
+    type: object
+  templatev25_internal_http_dto.SessionInfoResponse:
+    properties:
+      created_at:
+        type: string
+      ip_address:
+        type: string
+      is_current:
+        type: boolean
+      last_active:
+        type: string
+      session_id:
+        type: string
+      user_agent:
+        type: string
+    type: object
+  templatev25_internal_http_dto.SessionListResponse:
+    properties:
+      sessions:
+        items:
+          $ref: '#/definitions/templatev25_internal_http_dto.SessionInfoResponse'
+        type: array
+      total:
+        type: integer
+    type: object
+  templatev25_internal_http_dto.SetDefaultAccountRequest:
+    properties:
+      account_id:
+        type: integer
+    required:
+    - account_id
+    type: object
+  templatev25_internal_http_dto.SetPasswordRequest:
+    properties:
+      password:
+        minLength: 8
+        type: string
+    required:
+    - password
+    type: object
+  templatev25_internal_http_dto.SystemCreateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      icon:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      key:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      path:
+        maxLength: 255
+        type: string
+      sequence:
+        type: integer
+    required:
+    - code
+    - name
+    type: object
+  templatev25_internal_http_dto.SystemUpdateDto:
+    properties:
+      code:
+        maxLength: 255
+        type: string
+      description:
+        maxLength: 255
+        type: string
+      icon:
+        maxLength: 255
+        type: string
+      is_active:
+        type: boolean
+      key:
+        maxLength: 255
+        type: string
+      name:
+        maxLength: 255
+        type: string
+      path:
+        maxLength: 255
+        type: string
+      sequence:
+        type: integer
+    required:
+    - code
+    - name
+    type: object
+  templatev25_internal_http_dto.TOTPSetupResponse:
+    properties:
+      qr_code_url:
+        type: string
+      secret:
+        type: string
+    type: object
+  templatev25_internal_http_dto.TerminalCreateDto:
+    properties:
+      name:
+        maxLength: 255
+        type: string
+      org_id:
+        description: хоосон бол token-оос авна
+        type: integer
+      serial:
+        maxLength: 80
+        type: string
+    required:
+    - name
+    - serial
+    type: object
+  templatev25_internal_http_dto.TerminalUpdateDto:
+    properties:
+      name:
+        maxLength: 255
+        type: string
+      org_id:
+        description: хоосон бол token-оос авна
+        type: integer
+      serial:
+        maxLength: 80
+        type: string
+    required:
+    - name
+    - serial
+    type: object
+  templatev25_internal_http_dto.UpdateUserStatusRequest:
+    properties:
+      reason:
+        maxLength: 500
+        type: string
+      status:
+        enum:
+        - active
+        - suspended
+        - locked
+        - deactivated
+        type: string
+    required:
+    - status
+    type: object
+  templatev25_internal_http_dto.UserCreateDto:
+    properties:
+      birth_date:
+        maxLength: 10
+        type: string
+      civil_id:
+        type: integer
+      email:
+        maxLength: 80
+        type: string
+      family_name:
+        maxLength: 80
+        type: string
+      first_name:
+        maxLength: 150
+        type: string
+      gender:
+        type: integer
+      id:
+        description: хуучин логикоор Id-тайгаар орж ирдэг
+        type: integer
+      last_name:
+        maxLength: 150
+        type: string
+      phone_no:
+        maxLength: 8
+        type: string
+      reg_no:
+        maxLength: 10
+        type: string
+    required:
+    - id
+    type: object
+  templatev25_internal_http_dto.UserInfo:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      last_name:
+        type: string
+      status:
+        type: string
+    type: object
+  templatev25_internal_http_dto.UserRoleAssignByRole:
+    properties:
+      role_id:
+        type: integer
+      user_ids:
+        items:
+          type: integer
+        minItems: 1
+        type: array
+    required:
+    - role_id
+    - user_ids
+    type: object
+  templatev25_internal_http_dto.UserRoleRemoveDto:
+    properties:
+      role_id:
+        type: integer
+      user_id:
+        type: integer
+    required:
+    - role_id
+    - user_id
+    type: object
+  templatev25_internal_http_dto.UserUpdateDto:
+    properties:
+      birth_date:
+        maxLength: 10
+        type: string
+      civil_id:
+        type: integer
+      email:
+        maxLength: 80
+        type: string
+      family_name:
+        maxLength: 80
+        type: string
+      first_name:
+        maxLength: 150
+        type: string
+      gender:
+        type: integer
+      id:
+        type: integer
+      last_name:
+        maxLength: 150
+        type: string
+      phone_no:
+        maxLength: 8
+        type: string
+      reg_no:
+        maxLength: 10
+        type: string
+    required:
+    - id
+    type: object
+  templatev25_internal_http_dto.VerifyBackupCodeRequest:
+    properties:
+      code:
+        type: string
+      mfa_token:
+        type: string
+    required:
+    - code
+    - mfa_token
+    type: object
+  templatev25_internal_http_dto.VerifyMFARequest:
+    properties:
+      code:
+        type: string
+      mfa_token:
+        type: string
+    required:
+    - code
+    - mfa_token
+    type: object
+info:
+  contact: {}
+  description: Fiber + Gorm + Auth + RBAC demo
+  title: Template Backend API
+  version: "1.0"
+paths:
+  /actions:
+    get:
+      parameters:
+      - description: Search (code/name/description)
+        in: query
+        name: search
+        type: string
+      - description: Filter by module_id
+        in: query
+        name: module_id
+        type: integer
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Sort (e.g. code:asc,name:desc)
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List actions (paginated)
+      tags:
+      - actions
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ActionCreateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create action
+      tags:
+      - actions
+  /actions/{id}:
+    delete:
+      parameters:
+      - description: ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete action (soft)
+      tags:
+      - actions
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ActionUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update action
+      tags:
+      - actions
+  /api-logs:
+    get:
+      description: Get paginated list of API logs with filtering
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Filter by HTTP method (GET, POST, etc.)
+        in: query
+        name: method
+        type: string
+      - description: Filter by path (ILIKE)
+        in: query
+        name: path
+        type: string
+      - description: Filter by status code
+        in: query
+        name: status_code
+        type: integer
+      - description: Filter by user ID
+        format: int64
+        in: query
+        name: user_id
+        type: integer
+      - description: Filter by organization ID
+        format: int64
+        in: query
+        name: org_id
+        type: integer
+      - description: Filter by IP address (ILIKE)
+        in: query
+        name: ip
+        type: string
+      - description: Search (method/path/ip/username)
+        in: query
+        name: search
+        type: string
+      - description: Sort (e.g. created_date:desc,id:desc)
+        in: query
+        name: sort
+        type: string
+      - description: Filter from date (YYYY-MM-DD)
+        in: query
+        name: created_from
+        type: string
+      - description: Filter to date (YYYY-MM-DD)
+        in: query
+        name: created_to
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List API logs (paginated)
+      tags:
+      - api-logs
+  /auth/callback:
+    get:
+      description: Handles OAuth callback, sets session cookie
+      parameters:
+      - description: OAuth state
+        in: query
+        name: state
+        required: true
+        type: string
+      - description: Session ID
+        in: query
+        name: sid
+        required: true
+        type: string
+      responses:
+        "302":
+          description: Redirect to callback URL
+        "400":
+          description: Invalid state
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+      summary: OAuth callback handler
+      tags:
+      - auth
+  /auth/google/login:
+    post:
+      description: Login with Google ID token
+      parameters:
+      - description: Google ID token
+        in: query
+        name: id_token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: id_token required
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Google OAuth login
+      tags:
+      - auth
+  /auth/local/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user with email and password. Returns MFA token if
+        MFA is enabled.
+      parameters:
+      - description: Login credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Invalid credentials
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "423":
+          description: Account locked
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      summary: Login with email and password
+      tags:
+      - local-auth
+  /auth/local/logout:
+    post:
+      description: Logout and invalidate current session
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Logout current session
+      tags:
+      - local-auth
+  /auth/local/logout-all:
+    post:
+      description: Logout and invalidate all user sessions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Logout all sessions
+      tags:
+      - local-auth
+  /auth/local/me/login-history:
+    get:
+      parameters:
+      - description: Limit (default 50)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.LoginHistoryResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get login history
+      tags:
+      - local-auth-user
+  /auth/local/me/mfa:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.MFAStatusResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get MFA status
+      tags:
+      - local-auth-user
+  /auth/local/me/mfa/backup-codes:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.BackupCodesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Generate new backup codes
+      tags:
+      - local-auth-user
+  /auth/local/me/mfa/totp:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: TOTP code
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.DisableTOTPRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Disable TOTP MFA
+      tags:
+      - local-auth-user
+  /auth/local/me/mfa/totp/confirm:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: TOTP code
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ConfirmTOTPRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Confirm TOTP setup
+      tags:
+      - local-auth-user
+  /auth/local/me/mfa/totp/setup:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.TOTPSetupResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Setup TOTP MFA
+      tags:
+      - local-auth-user
+  /auth/local/me/password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Password change
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Change password
+      tags:
+      - local-auth-user
+  /auth/local/me/security-audit:
+    get:
+      parameters:
+      - description: Limit (default 50)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.SecurityAuditResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get security audit trail
+      tags:
+      - local-auth-user
+  /auth/local/me/sessions:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.SessionListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List active sessions
+      tags:
+      - local-auth-user
+  /auth/local/me/sessions/{id}:
+    delete:
+      parameters:
+      - description: Session ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Revoke a specific session
+      tags:
+      - local-auth-user
+  /auth/local/refresh:
+    post:
+      description: Extend session expiration time
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Refresh session
+      tags:
+      - local-auth
+  /auth/local/verify-backup-code:
+    post:
+      consumes:
+      - application/json
+      description: Verify backup code to complete login when TOTP is unavailable
+      parameters:
+      - description: Backup code verification
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.VerifyBackupCodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Invalid code
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      summary: Verify backup code
+      tags:
+      - local-auth
+  /auth/local/verify-mfa:
+    post:
+      consumes:
+      - application/json
+      description: Verify TOTP code to complete login
+      parameters:
+      - description: MFA verification
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.VerifyMFARequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Invalid code
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      summary: Verify MFA code
+      tags:
+      - local-auth
+  /auth/login:
+    get:
+      description: Redirects user to SSO login page with PKCE
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Redirect to SSO
+      summary: Redirect to OAuth login
+      tags:
+      - auth
+  /auth/logout:
+    post:
+      description: Invalidates session and clears cookie
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Logout user
+      tags:
+      - auth
+  /auth/org/change:
+    post:
+      consumes:
+      - application/json
+      description: Switches user's active organization
+      parameters:
+      - description: Organization ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/common.ID'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Change current organization
+      tags:
+      - auth
+  /auth/verify:
+    get:
+      description: Verifies session and sets cookie
+      parameters:
+      - description: Session ID
+        in: query
+        name: sid
+        type: string
+      responses:
+        "302":
+          description: Redirect to callback URL
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Verify authentication
+      tags:
+      - auth
+  /chat:
+    get:
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List chat items
+      tags:
+      - chat
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Chat item data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ChatItemCreateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create chat item
+      tags:
+      - chat
+  /chat/{id}:
+    delete:
+      parameters:
+      - description: Chat item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete chat item
+      tags:
+      - chat
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Chat item ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Chat item data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ChatItemUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update chat item
+      tags:
+      - chat
+  /chat/key:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Key
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ChatItemKeyDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get chat item by key
+      tags:
+      - chat
+  /client:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List OAuth clients
+      tags:
+      - client
+  /client/scope:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Scope data
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete OAuth scope
+      tags:
+      - client
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List OAuth scopes
+      tags:
+      - client
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Scope data
+        in: body
+        name: body
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create OAuth scope
+      tags:
+      - client
+  /me:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get current user (claims)
+      tags:
+      - me
+  /me/accounts:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get user's Tpay accounts
+      tags:
+      - me
+  /me/accounts/{account_id}/qr:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Account ID
+        in: path
+        name: account_id
+        required: true
+        type: integer
+      - description: QR data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.AccountQRGenerateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Generate QR code for Tpay account
+      tags:
+      - me
+  /me/accounts/default:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Account data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.SetDefaultAccountRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Set default Tpay account
+      tags:
+      - me
+  /me/accounts/statement:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get Tpay account statement
+      tags:
+      - me
+  /me/card/confirm:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Confirmation data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ConfirmCardReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Confirm Tpay card
+      tags:
+      - me
+  /me/card/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Card data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.CreateCardDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add Tpay card
+      tags:
+      - me
+  /me/card/list:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get Tpay card list
+      tags:
+      - me
+  /me/card/otp:
+    get:
+      parameters:
+      - description: Card ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Send OTP for Tpay card
+      tags:
+      - me
+  /me/card/verify:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Verification data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ReqVerifyCard'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Verify Tpay card
+      tags:
+      - me
+  /me/organizations:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get user's organizations list
+      tags:
+      - me
+  /me/profile:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get user profile with organizations
+      tags:
+      - me
+  /me/profile/sso:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get profile from SSO
+      tags:
+      - me
+  /me/tpay/transaction/p2p:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Transfer data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.P2PTransferRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: P2P transfer
+      tags:
+      - me
+  /me/tpay/transaction/qr-pay:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Payment data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.QRPayRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: QR payment
+      tags:
+      - me
+  /menu:
+    get:
+      description: Get all menus with children preloaded (tree structure, no pagination)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List menus
+      tags:
+      - menu
+    post:
+      consumes:
+      - application/json
+      description: Create a new menu
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.MenuCreateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create menu
+      tags:
+      - menu
+  /menu/{id}:
+    delete:
+      description: Delete a menu
+      parameters:
+      - description: Menu ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete menu
+      tags:
+      - menu
+    get:
+      description: Get menu by ID
+      parameters:
+      - description: Menu ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get menu by ID
+      tags:
+      - menu
+    put:
+      consumes:
+      - application/json
+      description: Update an existing menu
+      parameters:
+      - description: Menu ID
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.MenuUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update menu
+      tags:
+      - menu
+  /menu/my:
+    get:
+      description: Get all menus accessible by current user's roles (tree structure)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List menus by user roles
+      tags:
+      - menu
+  /module:
+    get:
+      description: Get paginated list of modules
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Filter by system_id
+        in: query
+        name: system_id
+        type: integer
+      - description: Search by name/code
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List modules
+      tags:
+      - module
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ModuleCreateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create module
+      tags:
+      - module
+  /module/{id}:
+    delete:
+      parameters:
+      - description: Module ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete module
+      tags:
+      - module
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Module ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.ModuleUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update module
+      tags:
+      - module
+  /news:
+    get:
+      description: Get paginated list of news articles
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.PaginatedResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      summary: List news
+      tags:
+      - news
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: News data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.NewsDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create news
+      tags:
+      - news
+  /news/{id}:
+    delete:
+      parameters:
+      - description: News ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete news
+      tags:
+      - news
+    get:
+      parameters:
+      - description: News ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      summary: Get news by ID
+      tags:
+      - news
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: News ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: News data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.NewsDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update news
+      tags:
+      - news
+  /notification:
+    get:
+      description: Get paginated list of user notifications
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List notifications
+      tags:
+      - notification
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Notification data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.NotificationSendDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Send notification
+      tags:
+      - notification
+  /notification/groups:
+    get:
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List notification groups
+      tags:
+      - notification
+  /notification/read:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Group ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.NotificationReadDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Mark notification group as read
+      tags:
+      - notification
+  /notification/read-all:
+    post:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Mark all notifications as read
+      tags:
+      - notification
+  /organization:
+    get:
+      description: Get paginated list of organizations
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List organizations
+      tags:
+      - organization
+    post:
+      consumes:
+      - application/json
+      description: Create a new organization
+      parameters:
+      - description: Organization data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrganizationDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create organization
+      tags:
+      - organization
+  /organization/{id}:
+    delete:
+      description: Delete an organization (soft delete)
+      parameters:
+      - description: Organization ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete organization
+      tags:
+      - organization
+    put:
+      consumes:
+      - application/json
+      description: Update an existing organization
+      parameters:
+      - description: Organization ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Organization data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrganizationUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update organization
+      tags:
+      - organization
+  /organization/find:
+    get:
+      description: Search organization from SSO Core service
+      parameters:
+      - description: Search text (reg_no or name)
+        in: query
+        name: search_text
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Find organization from Core
+      tags:
+      - organization
+  /organization/tree:
+    get:
+      description: Get hierarchical organization tree
+      parameters:
+      - description: Organization ID
+        in: query
+        name: org_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get organization tree
+      tags:
+      - organization
+  /orgtype:
+    get:
+      description: Get paginated list of organization types
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List organization types
+      tags:
+      - orgtype
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrganizationTypeDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create organization type
+      tags:
+      - orgtype
+  /orgtype/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete organization type
+      tags:
+      - orgtype
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrganizationTypeDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update organization type
+      tags:
+      - orgtype
+  /orgtype/role:
+    get:
+      parameters:
+      - description: Organization Type ID
+        in: query
+        name: type_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get roles by organization type
+      tags:
+      - orgtype
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrgTypeRolesAddDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add roles to organization type
+      tags:
+      - orgtype
+  /orgtype/system:
+    get:
+      parameters:
+      - description: Organization Type ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get systems by organization type
+      tags:
+      - orgtype
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrgTypeAddSystemsDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add systems to organization type
+      tags:
+      - orgtype
+  /orguser:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrgUserDeleteDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Remove user from organization
+      tags:
+      - orguser
+    get:
+      parameters:
+      - description: Organization ID
+        in: query
+        name: org_id
+        type: integer
+      - description: User ID
+        in: query
+        name: user_id
+        type: integer
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List organization users
+      tags:
+      - orguser
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.OrgUserCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add user to organization
+      tags:
+      - orguser
+  /orguser/organizations:
+    get:
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        type: integer
+      - description: Filter by name
+        in: query
+        name: name
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get organizations by user
+      tags:
+      - orguser
+  /orguser/users:
+    get:
+      parameters:
+      - description: Organization ID
+        in: query
+        name: org_id
+        type: integer
+      - description: Filter by name
+        in: query
+        name: name
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get users by organization
+      tags:
+      - orguser
+  /permissions:
+    get:
+      parameters:
+      - description: Search (code/name/description)
+        in: query
+        name: search
+        type: string
+      - description: Filter by module_id
+        in: query
+        name: module_id
+        type: integer
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Sort (e.g. code:asc,name:desc)
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List permissions (paginated)
+      tags:
+      - permissions
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.PermissionCreateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create permission
+      tags:
+      - permissions
+  /permissions/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete permission (soft)
+      tags:
+      - permissions
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.PermissionCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update permission
+      tags:
+      - permissions
+  /role:
+    get:
+      parameters:
+      - description: Page number (>=1)
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: pageSize
+        type: integer
+      - description: Search JSON (e.g. [{\
+        in: query
+        name: search
+        type: string
+      - description: Sort JSON (e.g. [{\
+        in: query
+        name: sort
+        type: string
+      - description: Created from (YYYY-MM-DD)
+        in: query
+        name: createdFrom
+        type: string
+      - description: Created to (YYYY-MM-DD)
+        in: query
+        name: createdTo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List roles
+      tags:
+      - role
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Role data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.RoleCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create role
+      tags:
+      - role
+  /role-matrix:
+    delete:
+      consumes:
+      - application/json
+      description: Remove role assignment from user
+      parameters:
+      - description: Remove data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.UserRoleRemoveDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Remove user role
+      tags:
+      - role-matrix
+    post:
+      consumes:
+      - application/json
+      description: Assign role to user (by role or by user)
+      parameters:
+      - description: Assignment data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.UserRoleAssignByRole'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Assign user role
+      tags:
+      - role-matrix
+  /role-matrix/roles:
+    get:
+      description: Get paginated list of roles for specified user
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: integer
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get roles by user
+      tags:
+      - role-matrix
+  /role-matrix/users:
+    get:
+      description: Get paginated list of users with specified role
+      parameters:
+      - description: Role ID
+        in: query
+        name: role_id
+        required: true
+        type: integer
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get users by role
+      tags:
+      - role-matrix
+  /role/{id}:
+    delete:
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete (soft) role
+      tags:
+      - role
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Role data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.RoleUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update role
+      tags:
+      - role
+  /role/permissions:
+    get:
+      parameters:
+      - description: Role ID
+        in: query
+        name: role_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List permissions of a role
+      tags:
+      - role
+    post:
+      consumes:
+      - application/json
+      description: Replaces all permissions of a role with the provided list
+      parameters:
+      - description: Permission IDs
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.RolePermissionsUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Replace permissions of a role
+      tags:
+      - role
+  /terminal:
+    get:
+      parameters:
+      - description: page>=1
+        in: query
+        name: page
+        type: integer
+      - description: pageSize
+        in: query
+        name: size
+        type: integer
+      - description: JSON search (name,serial,org_id)
+        in: query
+        name: search
+        type: string
+      - description: JSON sort
+        in: query
+        name: sort
+        type: string
+      - description: YYYY-MM-DD
+        in: query
+        name: createdFrom
+        type: string
+      - description: YYYY-MM-DD
+        in: query
+        name: createdTo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - terminal
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.TerminalCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - terminal
+  /terminal/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - terminal
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.TerminalUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - terminal
+  /user:
+    get:
+      parameters:
+      - description: Page number (>=1)
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: JSON search (first_name,last_name,reg_no,phone_no,...)
+        in: query
+        name: search
+        type: string
+      - description: JSON sort
+        in: query
+        name: sort
+        type: string
+      - description: Created from (YYYY-MM-DD)
+        in: query
+        name: createdFrom
+        type: string
+      - description: Created to (YYYY-MM-DD)
+        in: query
+        name: createdTo
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: List users
+      tags:
+      - user
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.UserCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create user
+      tags:
+      - user
+  /user/{id}:
+    delete:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete user
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.UserUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update user
+      tags:
+      - user
+  /user/{id}/password:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Password
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.SetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Set user password (admin)
+      tags:
+      - user
+  /user/{id}/status:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Status update
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/templatev25_internal_http_dto.UpdateUserStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update user status (admin)
+      tags:
+      - user
+  /user/{id}/unlock:
+    post:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Unlock user account (admin)
+      tags:
+      - user
+  /user/find-from-core:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Search payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/ssoclient.ReqFind'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/templatev25_internal_http_dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Find user from Core system
+      tags:
+      - user
+schemes:
+- http
+- https
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

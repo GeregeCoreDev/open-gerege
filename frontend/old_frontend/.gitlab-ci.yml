@@ -1,0 +1,56 @@
+stages:
+  - check
+  - test
+  - build
+
+default:
+  image: node:20-alpine
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - .next/cache/
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+before_script:
+  - npm ci
+
+lint:
+  stage: check
+  script:
+    - npm run lint
+
+typecheck:
+  stage: check
+  script:
+    - npm run typecheck
+
+unit_test:
+  stage: test
+  script:
+    - npm run test:run
+
+e2e_test:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.49.0-jammy
+  script:
+    - npm ci
+    - npx playwright install --with-deps
+    - npx playwright test
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    expire_in: 1 week
+
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - .next/
+    expire_in: 1 week

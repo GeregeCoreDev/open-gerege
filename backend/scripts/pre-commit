@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[pre-commit] running checks..."
+
+# 1) golangci-lint
+if command -v golangci-lint >/dev/null 2>&1; then
+  golangci-lint run ./...
+else
+  echo "golangci-lint not found — skipping. (Install: https://golangci-lint.run/)"
+fi
+
+# 2) context.Background guard (cmd/ болон тестээс бусад файлуудад)
+violations=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.go$' | grep -vE '^cmd/|_test\.go$' || true)
+if [ -n "$violations" ]; then
+  bad=$(echo "$violations" | xargs -I{} grep -nH "context\.Background(" {} || true)
+  if [ -n "$bad" ]; then
+    echo "❌ context.Background() usage is forbidden outside cmd/ and tests:"
+    echo "$bad"
+    echo "Use the inbound ctx or context.TODO() only during scaffolding (and replace before commit)."
+    exit 1
+  fi
+fi
+
+echo "[pre-commit] OK"
